@@ -1,12 +1,14 @@
-import { getColonyNetworkClient, Network } from "@colony/colony-js";
-import { Wallet } from "ethers";
+import {
+  getColonyNetworkClient,
+  Network,
+  getLogs,
+  getBlockTime,
+  ColonyRole,
+} from "@colony/colony-js";
+import { Wallet, utils } from "ethers";
 import { InfuraProvider } from "ethers/providers";
-import { getLogs } from "@colony/colony-js";
-import { utils } from "ethers";
-import { getBlockTime } from "@colony/colony-js";
-import { ColonyRole } from "@colony/colony-js";
 import { EventTypes } from "../constants";
-import Event from "../interfaces/Event.interface";
+import Event from "interfaces/Event.interface";
 import apiService from "./ApiService";
 
 // Set up the network address constants that you'll be using

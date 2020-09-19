@@ -1,7 +1,7 @@
 import React from "react";
-import EventsList from "../../components/EventsList";
-import Event from "../../interfaces/Event.interface";
-import getEventLogs from "../../services/ColonyClient";
+import EventsList from "components/EventsList";
+import Event from "interfaces/Event.interface";
+import getEventLogs from "services/ColonyClient";
 import styles from "./events.module.css";
 
 interface Props {}

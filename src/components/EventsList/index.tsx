@@ -1,7 +1,7 @@
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import EventInterface from "../../interfaces/Event.interface";
-import EventCard from "../EventCard/";
+import EventInterface from "interfaces/Event.interface";
+import EventCard from "components/EventCard/";
 
 import styles from "./eventsList.module.css";
 

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import EventInterface from "../../interfaces/Event.interface";
-import blockies from "../../services/blockies";
+import EventInterface from "interfaces/Event.interface";
+import blockies from "services/blockies";
 import { EventTypes } from "../../constants";
 
 import styles from "./eventCard.module.css";
