@@ -120,29 +120,9 @@ const getSymbolFromToken = async (token: string) => {
   }
 };
 
-const getEventLogs = async () => {
-  const colonyClient: any = await getColonyClient();
-  // Get the filter
-  // There's a corresponding filter method for all event types
-  const eventFilter1 = colonyClient.filters.PayoutClaimed();
-  const eventFilter2 = colonyClient.filters.ColonyInitialised();
-  const eventFilter3 = colonyClient.filters.ColonyRoleSet();
-  const eventFilter4 = colonyClient.filters.DomainAdded();
-
-  // Get the raw logs array
-  const eventLogs = [
-    ...(await getLogs(colonyClient, eventFilter1)),
-    ...(await getLogs(colonyClient, eventFilter2)),
-    ...(await getLogs(colonyClient, eventFilter3)),
-    ...(await getLogs(colonyClient, eventFilter4)),
-  ];
-
-  const parsedLogs = eventLogs.map((event) =>
-    colonyClient.interface.parseLog(event)
-  );
-
-  const data = await Promise.all(
-    parsedLogs.map(async (event, index) => {
+const processEventLogsData = async (eventLogs: any, parsedLogs: any) => {
+  const data: Event[] = await Promise.all(
+    parsedLogs.map(async (event: any, index: number) => {
       const date = await getDate(event.blockHash);
 
       let finalEventData: Event = {
@@ -188,8 +168,34 @@ const getEventLogs = async () => {
     })
   );
 
-  data.sort((a, b) => a.secondary - b.secondary);
+  data.sort((a: Event, b: Event) => a.secondary - b.secondary);
+
   return data;
+};
+
+const getEventLogs = async () => {
+  const colonyClient: any = await getColonyClient();
+  // Get the filter
+  // There's a corresponding filter method for all event types
+  const eventFilter1 = colonyClient.filters.PayoutClaimed();
+  const eventFilter2 = colonyClient.filters.ColonyInitialised();
+  const eventFilter3 = colonyClient.filters.ColonyRoleSet();
+  const eventFilter4 = colonyClient.filters.DomainAdded();
+
+  // Get the raw logs array
+  const eventLogs = [
+    ...(await getLogs(colonyClient, eventFilter1)),
+    ...(await getLogs(colonyClient, eventFilter2)),
+    ...(await getLogs(colonyClient, eventFilter3)),
+    ...(await getLogs(colonyClient, eventFilter4)),
+  ];
+
+  const parsedLogs = eventLogs.map((event) =>
+    colonyClient.interface.parseLog(event)
+  );
+
+  const eventLogsData = processEventLogsData(eventLogs, parsedLogs);
+  return eventLogsData;
 };
 
 export default getEventLogs;
