@@ -10,6 +10,7 @@ import { InfuraProvider } from "ethers/providers";
 import { EventTypes } from "../constants";
 import Event from "interfaces/Event.interface";
 import apiService from "./ApiService";
+import { getTokenSymbolMap, saveTokenSymbolMap } from "./utils";
 
 // Set up the network address constants that you'll be using
 // The two below represent the current ones on mainnet
@@ -24,7 +25,7 @@ const networkClientOptions = {
   networkAddress: MAINNET_NETWORK_ADDRESS,
 };
 
-const TokenSymbolMapping: { [key: string]: string } = {};
+let TokenSymbolMapping: { [key: string]: string } = getTokenSymbolMap();
 
 // Get a random wallet
 // You don't really need control over it, since you won't be firing any trasactions out of it
@@ -113,7 +114,8 @@ const getSymbolFromToken = async (token: string) => {
     );
     console.log(token, tokenInfo);
     if (tokenInfo) {
-      TokenSymbolMapping[token] = tokenInfo.symbol;
+      TokenSymbolMapping = { ...TokenSymbolMapping, [token]: tokenInfo.symbol };
+      saveTokenSymbolMap(TokenSymbolMapping);
     }
     return tokenInfo ? tokenInfo.symbol : undefined;
   }
