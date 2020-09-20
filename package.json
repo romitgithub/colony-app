@@ -15,7 +15,6 @@
     "ethers": "^4.0.48",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-infinite-scroll-component": "^5.1.0",
     "react-scripts": "3.4.3",
     "typescript": "^3.8.3"
   },
