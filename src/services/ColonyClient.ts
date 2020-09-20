@@ -6,11 +6,12 @@ import {
   ColonyRole,
 } from "@colony/colony-js";
 import { Wallet, utils } from "ethers";
-import { InfuraProvider } from "ethers/providers";
+import { InfuraProvider, Log } from "ethers/providers";
 import { EventTypes } from "../constants";
 import Event from "interfaces/Event.interface";
 import apiService from "./ApiService";
 import { getTokenSymbolMap, saveTokenSymbolMap } from "./utils";
+import { LogDescription } from "ethers/utils";
 
 // Set up the network address constants that you'll be using
 // The two below represent the current ones on mainnet
@@ -48,9 +49,13 @@ const getColonyClient = async () => {
   return colonyClient;
 };
 
-const getDate = async (blockHash: string) => {
-  const date = await getBlockTime(provider, blockHash);
-  return date;
+const getDate = async (blockHash: string | undefined) => {
+  if (blockHash) {
+    const date = await getBlockTime(provider, blockHash);
+    return date;
+  } else {
+    return -1;
+  }
 };
 
 const getAmount = (originalAmount: string) => {
@@ -72,7 +77,7 @@ const getColonyInitialisedData = () => {
   };
 };
 
-const getColonyRoleSetData = (parsedEvent: any, event: any) => {
+const getColonyRoleSetData = (parsedEvent: LogDescription, event: Log) => {
   const role = ColonyRole[parsedEvent.values.role];
   const userAddress = event.address;
   const domainId = new utils.BigNumber(parsedEvent.values.domainId).toString();
@@ -82,7 +87,7 @@ const getColonyRoleSetData = (parsedEvent: any, event: any) => {
   };
 };
 
-const getPayoutClaimedData = (parsedEvent: any, event: any) => {
+const getPayoutClaimedData = (parsedEvent: LogDescription, event: Log) => {
   const userAddress = event.address;
   const amount = getAmount(parsedEvent.values.amount);
   const rewardPayoutId = new utils.BigNumber(
@@ -95,7 +100,7 @@ const getPayoutClaimedData = (parsedEvent: any, event: any) => {
   };
 };
 
-const getDomainAddedData = (parsedEvent: any, event: any) => {
+const getDomainAddedData = (parsedEvent: LogDescription) => {
   const domainId = new utils.BigNumber(parsedEvent.values.domainId).toString();
 
   return {
@@ -120,10 +125,13 @@ const getSymbolFromToken = async (token: string) => {
   }
 };
 
-const processEventLogsData = async (eventLogs: any, parsedLogs: any) => {
+const processEventLogsData = async (
+  eventLogs: Log[],
+  parsedLogs: LogDescription[]
+) => {
   const data: Event[] = await Promise.all(
-    parsedLogs.map(async (event: any, index: number) => {
-      const date = await getDate(event.blockHash);
+    parsedLogs.map(async (event: LogDescription, index: number) => {
+      const date = await getDate(eventLogs[index].blockHash);
 
       let finalEventData: Event = {
         type: event.name,
@@ -158,7 +166,7 @@ const processEventLogsData = async (eventLogs: any, parsedLogs: any) => {
         case EventTypes.DomainAdded:
           finalEventData = {
             ...finalEventData,
-            ...getDomainAddedData(event, eventLogs[index]),
+            ...getDomainAddedData(event),
           };
           break;
         default:
@@ -168,7 +176,7 @@ const processEventLogsData = async (eventLogs: any, parsedLogs: any) => {
     })
   );
 
-  data.sort((a: Event, b: Event) => a.secondary - b.secondary);
+  data.sort((a: Event, b: Event) => b.secondary - a.secondary);
 
   return data;
 };
@@ -183,14 +191,14 @@ const getEventLogs = async () => {
   const eventFilter4 = colonyClient.filters.DomainAdded();
 
   // Get the raw logs array
-  const eventLogs = [
+  const eventLogs: Log[] = [
     ...(await getLogs(colonyClient, eventFilter1)),
     ...(await getLogs(colonyClient, eventFilter2)),
     ...(await getLogs(colonyClient, eventFilter3)),
     ...(await getLogs(colonyClient, eventFilter4)),
   ];
 
-  const parsedLogs = eventLogs.map((event) =>
+  const parsedLogs: LogDescription[] = eventLogs.map((event) =>
     colonyClient.interface.parseLog(event)
   );
 
