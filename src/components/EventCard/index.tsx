@@ -59,7 +59,8 @@ export default class EventCard extends Component<Props> {
       seed: event.avatarSeed,
     });
     const imageUrl = icon.toDataURL();
-    const formattedDate = new Date(event.secondary).toDateString();
+    const formattedDate =
+      event.secondary !== -1 ? new Date(event.secondary).toDateString() : "";
     const PrimaryText = this.getPrimaryText(event);
     return (
       <div className={styles.eventCard}>
