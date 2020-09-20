@@ -112,7 +112,6 @@ const getSymbolFromToken = async (token: string) => {
       `https://api.ethplorer.io/getTokenInfo/${token}?apiKey=${API_KEY}`,
       {}
     );
-    console.log(token, tokenInfo);
     if (tokenInfo) {
       TokenSymbolMapping = { ...TokenSymbolMapping, [token]: tokenInfo.symbol };
       saveTokenSymbolMap(TokenSymbolMapping);
