@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/colony-app/static/css/main.c10967db.chunk.css",
-    "main.js": "/colony-app/static/js/main.bef34470.chunk.js",
-    "main.js.map": "/colony-app/static/js/main.bef34470.chunk.js.map",
+    "main.js": "/colony-app/static/js/main.e7109bb2.chunk.js",
+    "main.js.map": "/colony-app/static/js/main.e7109bb2.chunk.js.map",
     "runtime-main.js": "/colony-app/static/js/runtime-main.f143a048.js",
     "runtime-main.js.map": "/colony-app/static/js/runtime-main.f143a048.js.map",
     "static/js/2.0a034f7d.chunk.js": "/colony-app/static/js/2.0a034f7d.chunk.js",
     "static/js/2.0a034f7d.chunk.js.map": "/colony-app/static/js/2.0a034f7d.chunk.js.map",
     "index.html": "/colony-app/index.html",
-    "precache-manifest.6ba4e71c649e8665d6e799876aab7c68.js": "/colony-app/precache-manifest.6ba4e71c649e8665d6e799876aab7c68.js",
+    "precache-manifest.ead0ebd05ad3ba8c16029a233b849254.js": "/colony-app/precache-manifest.ead0ebd05ad3ba8c16029a233b849254.js",
     "service-worker.js": "/colony-app/service-worker.js",
     "static/css/main.c10967db.chunk.css.map": "/colony-app/static/css/main.c10967db.chunk.css.map",
     "static/js/2.0a034f7d.chunk.js.LICENSE.txt": "/colony-app/static/js/2.0a034f7d.chunk.js.LICENSE.txt",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.f143a048.js",
     "static/js/2.0a034f7d.chunk.js",
     "static/css/main.c10967db.chunk.css",
-    "static/js/main.bef34470.chunk.js"
+    "static/js/main.e7109bb2.chunk.js"
   ]
 }
