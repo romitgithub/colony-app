@@ -1,4 +1,10 @@
-.eventsList {
+.container {
+  height: 100vh;
+  overflow: scroll;
+  width: 100%;
+}
+
+.list {
   width: 700px;
   margin: 40px auto;
 }

@@ -31,7 +31,7 @@ export default class Events extends React.Component<Props, State> {
 
   render() {
     return (
-      <div className={styles.eventsContainer}>
+      <div className={styles.container}>
         {this.state.isLoading ? (
           <div>Loading data...</div>
         ) : this.state.eventsList ? (

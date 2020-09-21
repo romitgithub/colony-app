@@ -23,17 +23,17 @@ export default class EventCard extends Component<Props> {
     } = event.primary;
     switch (event.type) {
       case EventTypes.ColonyInitialised:
-        return <div className={styles.eventPrimaryText}>{data}</div>;
+        return <div className={styles.primaryText}>{data}</div>;
       case EventTypes.ColonyRoleSet:
         return (
-          <div className={styles.eventPrimaryText}>
+          <div className={styles.primaryText}>
             <span>{role}</span> role assigned to user <span>{userAddress}</span>{" "}
             in domain <span>{domainId}</span>
           </div>
         );
       case EventTypes.PayoutClaimed:
         return (
-          <div className={styles.eventPrimaryText}>
+          <div className={styles.primaryText}>
             User <span>{userAddress}</span> claimed{" "}
             <span>
               {amount}
@@ -44,12 +44,12 @@ export default class EventCard extends Component<Props> {
         );
       case EventTypes.DomainAdded:
         return (
-          <div className={styles.eventPrimaryText}>
+          <div className={styles.primaryText}>
             Domain <span>{domainId}</span> added.
           </div>
         );
       default:
-        return <div>{event.primary}</div>;
+        return <div className={styles.primaryText}>{event.primary}</div>;
     }
   };
 
@@ -63,16 +63,12 @@ export default class EventCard extends Component<Props> {
       event.secondary !== -1 ? new Date(event.secondary).toDateString() : "";
     const PrimaryText = this.getPrimaryText(event);
     return (
-      <div className={styles.eventCard}>
-        <img
-          className={styles.eventAvatar}
-          src={imageUrl}
-          alt="user-entropy-icon"
-        />
+      <div className={styles.card}>
+        <img className={styles.avatar} src={imageUrl} alt="user-entropy-icon" />
 
-        <div className={styles.eventMetaData}>
+        <div className={styles.metaData}>
           {PrimaryText}
-          <div className={styles.eventSecondaryText}>{formattedDate}</div>
+          <div className={styles.secondaryText}>{formattedDate}</div>
         </div>
       </div>
     );
