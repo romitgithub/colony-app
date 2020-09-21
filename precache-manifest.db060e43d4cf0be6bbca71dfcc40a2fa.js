@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "84e55d0475d85ce6f35aab4367d9792f",
+    "revision": "2d6ee1d2caeb7ba2d4bebba8175ba303",
     "url": "/colony-app/index.html"
   },
   {
-    "revision": "facd8ffe724ab5f77e9e",
-    "url": "/colony-app/static/css/main.c10967db.chunk.css"
+    "revision": "a5d584ee81dcea16d9a7",
+    "url": "/colony-app/static/css/main.b0674e8e.chunk.css"
   },
   {
     "revision": "ac7b0dca328605ba7d50",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/colony-app/static/js/2.52e3933c.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "facd8ffe724ab5f77e9e",
-    "url": "/colony-app/static/js/main.5055f0fa.chunk.js"
+    "revision": "a5d584ee81dcea16d9a7",
+    "url": "/colony-app/static/js/main.ad0a8d9e.chunk.js"
   },
   {
     "revision": "40c94fa6ed7aacca19f4",

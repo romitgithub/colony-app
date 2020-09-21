@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/colony-app/precache-manifest.55fcfd6667d8ce20537e1ea4877729ce.js"
+  "/colony-app/precache-manifest.db060e43d4cf0be6bbca71dfcc40a2fa.js"
 );
 
 self.addEventListener('message', (event) => {
