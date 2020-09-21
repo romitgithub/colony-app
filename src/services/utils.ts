@@ -1,8 +1,8 @@
-const saveTokenSymbolMap = (data: { [key: string]: string }) => {
+export const saveTokenSymbolMap = (data: { [key: string]: string }) => {
   window.localStorage.setItem("tokenSymbolMap", JSON.stringify(data));
 };
 
-const getTokenSymbolMap = () => {
+export const getTokenSymbolMap = () => {
   const data = window.localStorage.getItem("tokenSymbolMap");
   if (data) {
     return JSON.parse(data);
@@ -10,5 +10,3 @@ const getTokenSymbolMap = () => {
     return {};
   }
 };
-
-export { saveTokenSymbolMap, getTokenSymbolMap };

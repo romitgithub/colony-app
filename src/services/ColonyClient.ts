@@ -19,8 +19,11 @@ import { LogDescription } from "ethers/utils";
 const MAINNET_NETWORK_ADDRESS = `0x5346D0f80e2816FaD329F2c140c870ffc3c3E2Ef`;
 const MAINNET_BETACOLONY_ADDRESS = `0x869814034d96544f3C62DE2aC22448ed79Ac8e70`;
 
+const INFURA_NETWORK = "homestead";
+const INFURA_PROJECT_ID = "4c30d38bb01645a1bef9e70fbab10582";
+
 // Get a new Infura provider (don't worry too much about this)
-const provider = new InfuraProvider();
+const provider = new InfuraProvider(INFURA_NETWORK, INFURA_PROJECT_ID);
 
 const networkClientOptions = {
   networkAddress: MAINNET_NETWORK_ADDRESS,
